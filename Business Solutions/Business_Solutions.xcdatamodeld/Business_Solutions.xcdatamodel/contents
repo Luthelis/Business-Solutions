@@ -1,4 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8193.2" systemVersion="15A279b" minimumToolsVersion="Automatic">
+    <entity name="Assets" representedClassName=".Assets" syncable="YES">
+        <attribute name="cost" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="dateOfPurchase" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="maintainable" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="maintenanceCost" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="maintenanceDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="maintenanceDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nameOfItem" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serialNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="serialNumber"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Finances" representedClassName=".Finances" syncable="YES">
+        <attribute name="amount" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="frequency" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="recurring" optional="YES" attributeType="Boolean" syncable="YES"/>
+    </entity>
+    <entity name="Vehicles" representedClassName=".Vehicles" syncable="YES">
+        <attribute name="dateOfMaintenance" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="dateOfPurchase" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="initialOdometer" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="maintenanceCost" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="maintenanceOdometer" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="maintenanceType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="make" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="model" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="purchaseCost" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="vehicleName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="vin" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="year" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="vin"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <elements>
+        <element name="Assets" positionX="-54" positionY="0" width="128" height="165"/>
+        <element name="Finances" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="Vehicles" positionX="-36" positionY="9" width="128" height="225"/>
+    </elements>
 </model>

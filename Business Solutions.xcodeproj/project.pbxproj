@@ -7,48 +7,53 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E1332ADF1BFE44FD00B95760 /* BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1332ADE1BFE44FD00B95760 /* BusinessCell.swift */; };
+		E14A654E1B54889200CFE979 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E14A654D1B54889200CFE979 /* CoreData.framework */; };
+		E14A65501B5488B200CFE979 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E14A654F1B5488B200CFE979 /* AdSupport.framework */; };
+		E14A65521B5567F600CFE979 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E14A65511B5567F600CFE979 /* iAd.framework */; };
+		E1678C6F1BDD92A400B324FE /* ReportsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1678C6E1BDD92A400B324FE /* ReportsTableViewController.swift */; };
+		E1A6C90E1BE2EAC80073CF2B /* DetailedReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A6C90D1BE2EAC80073CF2B /* DetailedReportViewController.swift */; };
+		E1AD92DE1B9780DC007F8D38 /* Vehicles+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AD92D81B9780DC007F8D38 /* Vehicles+CoreDataProperties.swift */; };
+		E1AD92DF1B9780DC007F8D38 /* Vehicles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AD92D91B9780DC007F8D38 /* Vehicles.swift */; };
+		E1AD92E01B9780DC007F8D38 /* Assets+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AD92DA1B9780DC007F8D38 /* Assets+CoreDataProperties.swift */; };
+		E1AD92E11B9780DC007F8D38 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AD92DB1B9780DC007F8D38 /* Assets.swift */; };
+		E1AD92E21B9780DC007F8D38 /* Finances+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AD92DC1B9780DC007F8D38 /* Finances+CoreDataProperties.swift */; };
+		E1AD92E31B9780DC007F8D38 /* Finances.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AD92DD1B9780DC007F8D38 /* Finances.swift */; };
+		E1AD92E51B9781CA007F8D38 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AD92E41B9781CA007F8D38 /* CoreDataHandler.swift */; };
 		E1AF18AE1B5480CA00686734 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AF18AD1B5480CA00686734 /* AppDelegate.swift */; };
-		E1AF18B01B5480CA00686734 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AF18AF1B5480CA00686734 /* ViewController.swift */; };
+		E1AF18B01B5480CA00686734 /* ReportsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AF18AF1B5480CA00686734 /* ReportsViewController.swift */; };
 		E1AF18B31B5480CA00686734 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1AF18B11B5480CA00686734 /* Main.storyboard */; };
 		E1AF18B61B5480CA00686734 /* Business_Solutions.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1AF18B41B5480CA00686734 /* Business_Solutions.xcdatamodeld */; };
 		E1AF18B81B5480CA00686734 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1AF18B71B5480CA00686734 /* Assets.xcassets */; };
 		E1AF18BB1B5480CA00686734 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1AF18B91B5480CA00686734 /* LaunchScreen.storyboard */; };
-		E1AF18C61B5480CB00686734 /* Business_SolutionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AF18C51B5480CB00686734 /* Business_SolutionsTests.swift */; };
-		E1AF18D11B5480CB00686734 /* Business_SolutionsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AF18D01B5480CB00686734 /* Business_SolutionsUITests.swift */; };
+		E1D31B6D1B652A45004E33A9 /* AddDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D31B6C1B652A45004E33A9 /* AddDataViewController.swift */; };
+		E1D31B6F1B652C84004E33A9 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D31B6E1B652C84004E33A9 /* MenuView.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		E1AF18C21B5480CB00686734 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E1AF18A21B5480CA00686734 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E1AF18A91B5480CA00686734;
-			remoteInfo = "Business Solutions";
-		};
-		E1AF18CD1B5480CB00686734 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E1AF18A21B5480CA00686734 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E1AF18A91B5480CA00686734;
-			remoteInfo = "Business Solutions";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		E1332ADE1BFE44FD00B95760 /* BusinessCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessCell.swift; sourceTree = "<group>"; };
+		E14A654D1B54889200CFE979 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		E14A654F1B5488B200CFE979 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		E14A65511B5567F600CFE979 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		E1678C6E1BDD92A400B324FE /* ReportsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportsTableViewController.swift; sourceTree = "<group>"; };
+		E1A6C90D1BE2EAC80073CF2B /* DetailedReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedReportViewController.swift; sourceTree = "<group>"; };
+		E1AD92D81B9780DC007F8D38 /* Vehicles+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Vehicles+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E1AD92D91B9780DC007F8D38 /* Vehicles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vehicles.swift; sourceTree = "<group>"; };
+		E1AD92DA1B9780DC007F8D38 /* Assets+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assets+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E1AD92DB1B9780DC007F8D38 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		E1AD92DC1B9780DC007F8D38 /* Finances+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Finances+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E1AD92DD1B9780DC007F8D38 /* Finances.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Finances.swift; sourceTree = "<group>"; };
+		E1AD92E41B9781CA007F8D38 /* CoreDataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
 		E1AF18AA1B5480CA00686734 /* Business Solutions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Business Solutions.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1AF18AD1B5480CA00686734 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E1AF18AF1B5480CA00686734 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E1AF18AF1B5480CA00686734 /* ReportsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsViewController.swift; sourceTree = "<group>"; };
 		E1AF18B21B5480CA00686734 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E1AF18B51B5480CA00686734 /* Business_Solutions.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Business_Solutions.xcdatamodel; sourceTree = "<group>"; };
 		E1AF18B71B5480CA00686734 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E1AF18BA1B5480CA00686734 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E1AF18BC1B5480CA00686734 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E1AF18C11B5480CB00686734 /* Business SolutionsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Business SolutionsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E1AF18C51B5480CB00686734 /* Business_SolutionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Business_SolutionsTests.swift; sourceTree = "<group>"; };
-		E1AF18C71B5480CB00686734 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E1AF18CC1B5480CB00686734 /* Business SolutionsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Business SolutionsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E1AF18D01B5480CB00686734 /* Business_SolutionsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Business_SolutionsUITests.swift; sourceTree = "<group>"; };
-		E1AF18D21B5480CB00686734 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E1D31B6C1B652A45004E33A9 /* AddDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDataViewController.swift; sourceTree = "<group>"; };
+		E1D31B6E1B652C84004E33A9 /* MenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,32 +61,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E1AF18BE1B5480CB00686734 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E1AF18C91B5480CB00686734 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				E14A65521B5567F600CFE979 /* iAd.framework in Frameworks */,
+				E14A65501B5488B200CFE979 /* AdSupport.framework in Frameworks */,
+				E14A654E1B54889200CFE979 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E1678C6D1BDC564C00B324FE /* CoreData Files */ = {
+			isa = PBXGroup;
+			children = (
+				E1AD92D81B9780DC007F8D38 /* Vehicles+CoreDataProperties.swift */,
+				E1AD92D91B9780DC007F8D38 /* Vehicles.swift */,
+				E1AD92DA1B9780DC007F8D38 /* Assets+CoreDataProperties.swift */,
+				E1AD92DB1B9780DC007F8D38 /* Assets.swift */,
+				E1AD92DC1B9780DC007F8D38 /* Finances+CoreDataProperties.swift */,
+				E1AD92DD1B9780DC007F8D38 /* Finances.swift */,
+				E1AD92E41B9781CA007F8D38 /* CoreDataHandler.swift */,
+				E1AF18B41B5480CA00686734 /* Business_Solutions.xcdatamodeld */,
+			);
+			name = "CoreData Files";
+			sourceTree = "<group>";
+		};
 		E1AF18A11B5480CA00686734 = {
 			isa = PBXGroup;
 			children = (
+				E14A65511B5567F600CFE979 /* iAd.framework */,
+				E14A654F1B5488B200CFE979 /* AdSupport.framework */,
+				E14A654D1B54889200CFE979 /* CoreData.framework */,
 				E1AF18AC1B5480CA00686734 /* Business Solutions */,
-				E1AF18C41B5480CB00686734 /* Business SolutionsTests */,
-				E1AF18CF1B5480CB00686734 /* Business SolutionsUITests */,
 				E1AF18AB1B5480CA00686734 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,8 +100,6 @@
 			isa = PBXGroup;
 			children = (
 				E1AF18AA1B5480CA00686734 /* Business Solutions.app */,
-				E1AF18C11B5480CB00686734 /* Business SolutionsTests.xctest */,
-				E1AF18CC1B5480CB00686734 /* Business SolutionsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -100,32 +108,19 @@
 			isa = PBXGroup;
 			children = (
 				E1AF18AD1B5480CA00686734 /* AppDelegate.swift */,
-				E1AF18AF1B5480CA00686734 /* ViewController.swift */,
+				E1AF18AF1B5480CA00686734 /* ReportsViewController.swift */,
 				E1AF18B11B5480CA00686734 /* Main.storyboard */,
+				E1A6C90D1BE2EAC80073CF2B /* DetailedReportViewController.swift */,
+				E1678C6E1BDD92A400B324FE /* ReportsTableViewController.swift */,
+				E1332ADE1BFE44FD00B95760 /* BusinessCell.swift */,
+				E1D31B6E1B652C84004E33A9 /* MenuView.swift */,
+				E1D31B6C1B652A45004E33A9 /* AddDataViewController.swift */,
+				E1678C6D1BDC564C00B324FE /* CoreData Files */,
 				E1AF18B71B5480CA00686734 /* Assets.xcassets */,
 				E1AF18B91B5480CA00686734 /* LaunchScreen.storyboard */,
 				E1AF18BC1B5480CA00686734 /* Info.plist */,
-				E1AF18B41B5480CA00686734 /* Business_Solutions.xcdatamodeld */,
 			);
 			path = "Business Solutions";
-			sourceTree = "<group>";
-		};
-		E1AF18C41B5480CB00686734 /* Business SolutionsTests */ = {
-			isa = PBXGroup;
-			children = (
-				E1AF18C51B5480CB00686734 /* Business_SolutionsTests.swift */,
-				E1AF18C71B5480CB00686734 /* Info.plist */,
-			);
-			path = "Business SolutionsTests";
-			sourceTree = "<group>";
-		};
-		E1AF18CF1B5480CB00686734 /* Business SolutionsUITests */ = {
-			isa = PBXGroup;
-			children = (
-				E1AF18D01B5480CB00686734 /* Business_SolutionsUITests.swift */,
-				E1AF18D21B5480CB00686734 /* Info.plist */,
-			);
-			path = "Business SolutionsUITests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,61 +143,18 @@
 			productReference = E1AF18AA1B5480CA00686734 /* Business Solutions.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E1AF18C01B5480CB00686734 /* Business SolutionsTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E1AF18D81B5480CB00686734 /* Build configuration list for PBXNativeTarget "Business SolutionsTests" */;
-			buildPhases = (
-				E1AF18BD1B5480CB00686734 /* Sources */,
-				E1AF18BE1B5480CB00686734 /* Frameworks */,
-				E1AF18BF1B5480CB00686734 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E1AF18C31B5480CB00686734 /* PBXTargetDependency */,
-			);
-			name = "Business SolutionsTests";
-			productName = "Business SolutionsTests";
-			productReference = E1AF18C11B5480CB00686734 /* Business SolutionsTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		E1AF18CB1B5480CB00686734 /* Business SolutionsUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E1AF18DB1B5480CB00686734 /* Build configuration list for PBXNativeTarget "Business SolutionsUITests" */;
-			buildPhases = (
-				E1AF18C81B5480CB00686734 /* Sources */,
-				E1AF18C91B5480CB00686734 /* Frameworks */,
-				E1AF18CA1B5480CB00686734 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E1AF18CE1B5480CB00686734 /* PBXTargetDependency */,
-			);
-			name = "Business SolutionsUITests";
-			productName = "Business SolutionsUITests";
-			productReference = E1AF18CC1B5480CB00686734 /* Business SolutionsUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		E1AF18A21B5480CA00686734 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Timothy Transue";
 				TargetAttributes = {
 					E1AF18A91B5480CA00686734 = {
 						CreatedOnToolsVersion = 7.0;
-					};
-					E1AF18C01B5480CB00686734 = {
-						CreatedOnToolsVersion = 7.0;
-						TestTargetID = E1AF18A91B5480CA00686734;
-					};
-					E1AF18CB1B5480CB00686734 = {
-						CreatedOnToolsVersion = 7.0;
-						TestTargetID = E1AF18A91B5480CA00686734;
 					};
 				};
 			};
@@ -220,8 +172,6 @@
 			projectRoot = "";
 			targets = (
 				E1AF18A91B5480CA00686734 /* Business Solutions */,
-				E1AF18C01B5480CB00686734 /* Business SolutionsTests */,
-				E1AF18CB1B5480CB00686734 /* Business SolutionsUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -237,20 +187,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E1AF18BF1B5480CB00686734 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E1AF18CA1B5480CB00686734 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -258,42 +194,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1D31B6F1B652C84004E33A9 /* MenuView.swift in Sources */,
+				E1AD92E51B9781CA007F8D38 /* CoreDataHandler.swift in Sources */,
+				E1AD92E11B9780DC007F8D38 /* Assets.swift in Sources */,
 				E1AF18B61B5480CA00686734 /* Business_Solutions.xcdatamodeld in Sources */,
-				E1AF18B01B5480CA00686734 /* ViewController.swift in Sources */,
+				E1AD92E01B9780DC007F8D38 /* Assets+CoreDataProperties.swift in Sources */,
+				E1332ADF1BFE44FD00B95760 /* BusinessCell.swift in Sources */,
+				E1D31B6D1B652A45004E33A9 /* AddDataViewController.swift in Sources */,
+				E1AD92E31B9780DC007F8D38 /* Finances.swift in Sources */,
+				E1AF18B01B5480CA00686734 /* ReportsViewController.swift in Sources */,
+				E1AD92E21B9780DC007F8D38 /* Finances+CoreDataProperties.swift in Sources */,
+				E1AD92DE1B9780DC007F8D38 /* Vehicles+CoreDataProperties.swift in Sources */,
+				E1A6C90E1BE2EAC80073CF2B /* DetailedReportViewController.swift in Sources */,
+				E1678C6F1BDD92A400B324FE /* ReportsTableViewController.swift in Sources */,
+				E1AD92DF1B9780DC007F8D38 /* Vehicles.swift in Sources */,
 				E1AF18AE1B5480CA00686734 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E1AF18BD1B5480CB00686734 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E1AF18C61B5480CB00686734 /* Business_SolutionsTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E1AF18C81B5480CB00686734 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E1AF18D11B5480CB00686734 /* Business_SolutionsUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		E1AF18C31B5480CB00686734 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E1AF18A91B5480CA00686734 /* Business Solutions */;
-			targetProxy = E1AF18C21B5480CB00686734 /* PBXContainerItemProxy */;
-		};
-		E1AF18CE1B5480CB00686734 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E1AF18A91B5480CA00686734 /* Business Solutions */;
-			targetProxy = E1AF18CD1B5480CB00686734 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		E1AF18B11B5480CA00686734 /* Main.storyboard */ = {
@@ -404,6 +323,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ceeteedevelopment.Business-Solutions";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -415,54 +335,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ceeteedevelopment.Business-Solutions";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		E1AF18D91B5480CB00686734 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "Business SolutionsTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ceeteedevelopment.Business-SolutionsTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Business Solutions.app/Business Solutions";
-			};
-			name = Debug;
-		};
-		E1AF18DA1B5480CB00686734 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "Business SolutionsTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ceeteedevelopment.Business-SolutionsTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Business Solutions.app/Business Solutions";
-			};
-			name = Release;
-		};
-		E1AF18DC1B5480CB00686734 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = "Business SolutionsUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ceeteedevelopment.Business-SolutionsUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = "Business Solutions";
-				USES_XCTRUNNER = YES;
-			};
-			name = Debug;
-		};
-		E1AF18DD1B5480CB00686734 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = "Business SolutionsUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ceeteedevelopment.Business-SolutionsUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = "Business Solutions";
-				USES_XCTRUNNER = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -485,22 +358,7 @@
 				E1AF18D71B5480CB00686734 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		E1AF18D81B5480CB00686734 /* Build configuration list for PBXNativeTarget "Business SolutionsTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E1AF18D91B5480CB00686734 /* Debug */,
-				E1AF18DA1B5480CB00686734 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
-		E1AF18DB1B5480CB00686734 /* Build configuration list for PBXNativeTarget "Business SolutionsUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E1AF18DC1B5480CB00686734 /* Debug */,
-				E1AF18DD1B5480CB00686734 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
