@@ -15,7 +15,7 @@ class DetailedReportViewController: UIViewController, UIScrollViewDelegate {
 
     var fullItem : NSManagedObject!
     var context : NSManagedObjectContext!
-    var resultsController : NSFetchedResultsController!
+    var resultsController : NSFetchedResultsController<NSManagedObject>!
     let handler = CoreDataHandler()
     
     // MARK: - View Properties
@@ -78,11 +78,11 @@ class DetailedReportViewController: UIViewController, UIScrollViewDelegate {
         context = fullItem.managedObjectContext
         let device = UIDevice()
         device.beginGeneratingDeviceOrientationNotifications()
-        let center = NSNotificationCenter.defaultCenter()
-        center.addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: self)
-        center.addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: self)
-        center.addObserver(self, selector: "detectAutoRotation:", name: UIDeviceOrientationDidChangeNotification, object: self)
-        dataScroller.scrollEnabled = true
+        let center = NotificationCenter.default
+        center.addObserver(self, selector: #selector(DetailedReportViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: self)
+        center.addObserver(self, selector: #selector(DetailedReportViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: self)
+        center.addObserver(self, selector: #selector(DetailedReportViewController.detectAutoRotation(_:)), name: NSNotification.Name.UIDeviceOrientationDidChange, object: self)
+        dataScroller.isScrollEnabled = true
         dataScroller.bounces = true
         dataScroller.alwaysBounceVertical = true
         dataScroller.delegate = self
@@ -104,7 +104,7 @@ class DetailedReportViewController: UIViewController, UIScrollViewDelegate {
             self.vehicleTextFieldCollection = orderTextFields(self.vehicleTextFieldCollection)
             restoreVehicleData()
         }
-        cancelButton.enabled = false
+        cancelButton.isEnabled = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -112,82 +112,82 @@ class DetailedReportViewController: UIViewController, UIScrollViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func orderTextFields(fieldCollection: [UITextField]) -> [UITextField]
+    func orderTextFields(_ fieldCollection: [UITextField]) -> [UITextField]
     {
-        let sortedFieldCollection = fieldCollection.sort({ $0.tag < $1.tag})
+        let sortedFieldCollection = fieldCollection.sorted(by: { $0.tag < $1.tag})
         return sortedFieldCollection
     }
 
     // MARK: - Toolbar Items
 
-    @IBAction func beginAndEndEditing(sender: UIBarButtonItem)
+    @IBAction func beginAndEndEditing(_ sender: UIBarButtonItem)
     {
         if sender.title == "Edit"
         {
-            cancelButton.enabled = true
-            sender.style = .Done
+            cancelButton.isEnabled = true
+            sender.style = .done
             sender.title = "Done"
             if self.dataScroller.subviews.first == self.financeView
             {
                 for view in financeTextFieldCollection
                 {
-                    view.enabled = true
+                    view.isEnabled = true
                 }
-                financeRecurring.enabled = true
+                financeRecurring.isEnabled = true
             }
             else if self.dataScroller.subviews.first == self.assetView
             {
                 for view in assetTextFieldCollection
                 {
-                    view.enabled = true
+                    view.isEnabled = true
                 }
-                assetRepairable.enabled = true
+                assetRepairable.isEnabled = true
             }
             else if self.dataScroller.subviews.first == self.vehicleView
             {
                 for view in vehicleTextFieldCollection
                 {
-                    view.enabled = true
+                    view.isEnabled = true
                 }
             }
         }
         else if sender.title == "Done"
         {
             sender.title = "Edit"
-            sender.style = .Plain
-            cancelButton.enabled = false
+            sender.style = .plain
+            cancelButton.isEnabled = false
             if self.dataScroller.subviews.first == self.financeView
             {
                 for view in financeTextFieldCollection
                 {
-                    view.enabled = false
+                    view.isEnabled = false
                 }
-                financeRecurring.enabled = false
+                financeRecurring.isEnabled = false
             }
             else if self.dataScroller.subviews.first == self.assetView
             {
                 for view in assetTextFieldCollection
                 {
-                    view.enabled = false
+                    view.isEnabled = false
                 }
-                assetRepairable.enabled = false
+                assetRepairable.isEnabled = false
             }
             else if self.dataScroller.subviews.first == self.vehicleView
             {
                 for view in vehicleTextFieldCollection
                 {
-                    view.enabled = false
+                    view.isEnabled = false
                 }
             }
             saveData()
         }
         
     }
-    @IBAction func cancelEditing(sender: UIBarButtonItem)
+    @IBAction func cancelEditing(_ sender: UIBarButtonItem)
     {
         editAndDone.title = "Edit"
-        editAndDone.style = .Plain
-        sender.enabled = false
+        editAndDone.style = .plain
+        sender.isEnabled = false
         if self.dataScroller.subviews.first == self.financeView
         {
             restoreFinanceData()
@@ -202,43 +202,43 @@ class DetailedReportViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    @IBAction func changeView(sender: UISwitch)
+    @IBAction func changeView(_ sender: UISwitch)
     {
         if sender.superview == self.financeView
         {
-            if sender.on
+            if sender.isOn
             {
-                self.financeFrequencyLabel.hidden = false
-                self.financeFrequency.hidden = false
+                self.financeFrequencyLabel.isHidden = false
+                self.financeFrequency.isHidden = false
             }
             else
             {
-                self.financeFrequency.hidden = true
-                self.financeFrequencyLabel.hidden = true
+                self.financeFrequency.isHidden = true
+                self.financeFrequencyLabel.isHidden = true
             }
         }
         else if sender.superview == self.assetView
         {
-            if sender.on
+            if sender.isOn
             {
                 for view in assetMaintenanceLabelCollection
                 {
-                    view.hidden = false
+                    view.isHidden = false
                 }
                 for view in assetMaintenanceTextFieldCollection
                 {
-                    view.hidden = false
+                    view.isHidden = false
                 }
             }
             else
             {
                 for view in assetMaintenanceLabelCollection
                 {
-                    view.hidden = true
+                    view.isHidden = true
                 }
                 for view in assetMaintenanceTextFieldCollection
                 {
-                    view.hidden = true
+                    view.isHidden = true
                 }
             }
         }
@@ -248,12 +248,12 @@ class DetailedReportViewController: UIViewController, UIScrollViewDelegate {
         let financeObject = fullItem as! Finances
         financeDescription.text = financeObject.name
         financeAmount.text = "\(financeObject.amount!)"
-        financeDate.text = parseDateInformation(financeObject.date!)
-        if (financeObject.recurring?.boolValue)! == 0
+        financeDate.text = parseDateInformation(financeObject.date! as Date)
+        if (financeObject.recurring?.boolValue)! == false
         {
             financeRecurring.setOn(false, animated: false)
-            financeFrequency.hidden = true
-            financeFrequencyLabel.hidden = true
+            financeFrequency.isHidden = true
+            financeFrequencyLabel.isHidden = true
         }
         else
         {
@@ -269,15 +269,15 @@ class DetailedReportViewController: UIViewController, UIScrollViewDelegate {
         assetSerialNumber.text = assetObject.serialNumber
         assetPurchasePrice.text = "$\(assetObject.cost!)"
         assetPurchaseDate.text = "\(assetObject.dateOfPurchase!)"
-        if (assetObject.maintainable?.boolValue)! == 0
+        if (assetObject.maintainable?.boolValue)! == false
         {
             for label in assetMaintenanceLabelCollection
             {
-                label.hidden = true
+                label.isHidden = true
             }
             for field in assetMaintenanceTextFieldCollection
             {
-                field.hidden = true
+                field.isHidden = true
             }
             assetRepairable.setOn(false, animated: false)
         }
@@ -307,11 +307,11 @@ class DetailedReportViewController: UIViewController, UIScrollViewDelegate {
         vehicleMaintenanceOdometerReading.text = "\(vehicleObject.maintenanceOdometer)"
     }
     
-    func parseDateInformation(date : NSDate) -> String
+    func parseDateInformation(_ date : Date) -> String
     {
-        let formatter = NSDateFormatter()
-        formatter.dateStyle = .MediumStyle
-        return formatter.stringFromDate(date)
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        return formatter.string(from: date)
     }
     /*
     // MARK: - Navigation
@@ -325,12 +325,12 @@ class DetailedReportViewController: UIViewController, UIScrollViewDelegate {
     
     // MARK: - Autorotation Detection
     
-    func detectAutoRotation(notification: NSNotification)
+    func detectAutoRotation(_ notification: Notification)
     {
         dataScroller.subviews.first!.setNeedsDisplay()
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator)
     {
         self.view.setNeedsDisplay()
     }
@@ -340,7 +340,7 @@ class DetailedReportViewController: UIViewController, UIScrollViewDelegate {
     func detectFirstResponder(inView view : UIView) -> UIView?
     {
         var responderView = view
-        if responderView.isFirstResponder()
+        if responderView.isFirstResponder
         {
             return responderView
         }
@@ -348,7 +348,7 @@ class DetailedReportViewController: UIViewController, UIScrollViewDelegate {
         {
             for subView in responderView.subviews
             {
-                if subView.isFirstResponder()
+                if subView.isFirstResponder
                 {
                     responderView = subView
                 }
@@ -360,29 +360,29 @@ class DetailedReportViewController: UIViewController, UIScrollViewDelegate {
     func saveData()
     {
         var textArray = [String]()
-        if self.fullItem.entity == "Finances"
+        if self.fullItem.entity.name == "Finances"
         {
             for field in self.financeTextFieldCollection
             {
-                textArray.insert(field.text!, atIndex: textArray.endIndex)
+                textArray.insert(field.text!, at: textArray.endIndex)
             }
-            textArray.insert("\(financeRecurring.on)", atIndex: textArray.endIndex)
+            textArray.insert("\(financeRecurring.isOn)", at: textArray.endIndex)
             self.handler.editManagedObject(fullItem, withTextData: textArray)
         }
-        else if self.fullItem.entity == "Assets"
+        else if self.fullItem.entity.name == "Assets"
         {
             for field in self.assetTextFieldCollection
             {
-                textArray.insert(field.text!, atIndex: textArray.endIndex)
+                textArray.insert(field.text!, at: textArray.endIndex)
             }
-            textArray.insert("\(assetRepairable.on)", atIndex: textArray.endIndex)
+            textArray.insert("\(assetRepairable.isOn)", at: textArray.endIndex)
             self.handler.editManagedObject(fullItem, withTextData: textArray)
         }
-        else if self.fullItem.entity == "Vehicles"
+        else if self.fullItem.entity.name == "Vehicles"
         {
             for field in self.vehicleTextFieldCollection
             {
-                textArray.insert(field.text!, atIndex: textArray.endIndex)
+                textArray.insert(field.text!, at: textArray.endIndex)
             }
             self.handler.editManagedObject(fullItem, withTextData: textArray)
         }
@@ -390,13 +390,13 @@ class DetailedReportViewController: UIViewController, UIScrollViewDelegate {
     
     // MARK: - Notification Center Functions
     
-    func keyboardWillShow(notification: NSNotification)
+    func keyboardWillShow(_ notification: Notification)
     {
-        let userInfo = notification.userInfo
+        let userInfo = (notification as NSNotification).userInfo
         let localKeyboard = (userInfo![UIKeyboardIsLocalUserInfoKey] as! NSNumber).boolValue
         if localKeyboard
         {
-            let keyboardSize = (userInfo![UIKeyboardFrameBeginUserInfoKey] as! NSValue).CGRectValue()
+            let keyboardSize = (userInfo![UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
             let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
             dataScroller.contentInset = contentInsets
             if dataScroller.subviews.first == financeView
@@ -406,9 +406,9 @@ class DetailedReportViewController: UIViewController, UIScrollViewDelegate {
                 if tagToQuery == 3
                 {
                     let datePicker = UIDatePicker(frame: keyboardSize)
-                    datePicker.datePickerMode = .Date
-                    datePicker.setDate(NSDate(), animated: false)
-                    datePicker.addTarget(self, action: "updateDateField:", forControlEvents: .ValueChanged)
+                    datePicker.datePickerMode = .date
+                    datePicker.setDate(Date(), animated: false)
+                    datePicker.addTarget(self, action: Selector(("updateDateField:")), for: .valueChanged)
                     firstResponderTextField.inputView = datePicker
                 }
                 else if tagToQuery == 4
@@ -434,18 +434,18 @@ class DetailedReportViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    func keyboardWillHide(notification: NSNotification)
+    func keyboardWillHide(_ notification: Notification)
     {
-        let userInfo = notification.userInfo!
-        let keyboardSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        let userInfo = (notification as NSNotification).userInfo!
+        let keyboardSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
         dataScroller.contentInset = contentInsets
-        dataScroller.contentOffset = CGPointZero
+        dataScroller.contentOffset = CGPoint.zero
     }
     
     // MARK: - Accessory View Functions
     
-    @IBAction func previousField(sender: UIButton)
+    @IBAction func previousField(_ sender: UIButton)
     {
         let currentView = dataScroller.subviews.first!
         if let currentField = detectFirstResponder(inView: currentView) as? UITextField
@@ -455,7 +455,7 @@ class DetailedReportViewController: UIViewController, UIScrollViewDelegate {
             {
                 if view.tag == previousFieldTag
                 {
-                    if view.hidden == false
+                    if view.isHidden == false
                     {
                         view.becomeFirstResponder()
                     }
@@ -465,7 +465,7 @@ class DetailedReportViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    @IBAction func nextField(sender: UIButton)
+    @IBAction func nextField(_ sender: UIButton)
     {
         let currentView = dataScroller.subviews.first!
         if let field = detectFirstResponder(inView: currentView) as? UITextField
@@ -475,7 +475,7 @@ class DetailedReportViewController: UIViewController, UIScrollViewDelegate {
             {
                 if view.tag == nextFieldTag
                 {
-                    if view.hidden == false
+                    if view.isHidden == false
                     {
                         view.becomeFirstResponder()
                     }
@@ -485,7 +485,7 @@ class DetailedReportViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    @IBAction func dismissKeyboard(sender: UIButton)
+    @IBAction func dismissKeyboard(_ sender: UIButton)
     {
         if let field = detectFirstResponder(inView: dataScroller.subviews.first!) as? UITextField
         {
@@ -506,28 +506,28 @@ class DetailedReportViewController: UIViewController, UIScrollViewDelegate {
 
 extension DetailedReportViewController: UITextFieldDelegate
 {
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
     {
         return true
     }
     
-    func textFieldShouldEndEditing(textField: UITextField) -> Bool
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool
     {
         return true
     }
     
-    func textFieldDidBeginEditing(textField: UITextField)
+    func textFieldDidBeginEditing(_ textField: UITextField)
     {
         dataScroller.scrollRectToVisible(textField.frame, animated: true)
     }
     
-    func textFieldShouldClear(textField: UITextField) -> Bool
+    func textFieldShouldClear(_ textField: UITextField) -> Bool
     {
         textField.text = ""
         return true
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
         let nextFieldTag = textField.tag + 1
         for view in (dataScroller.subviews.first?.subviews)!
@@ -546,7 +546,7 @@ extension DetailedReportViewController: UITextFieldDelegate
 
 extension DetailedReportViewController: UIPickerViewDelegate, UIPickerViewDataSource
 {
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int
+    func numberOfComponents(in pickerView: UIPickerView) -> Int
     {
         if pickerView.superview == self.financeView
         {
@@ -562,7 +562,7 @@ extension DetailedReportViewController: UIPickerViewDelegate, UIPickerViewDataSo
         }
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
     {
         if pickerView.superview == self.financeView
         {
@@ -581,7 +581,7 @@ extension DetailedReportViewController: UIPickerViewDelegate, UIPickerViewDataSo
             return 0
         }
     }
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
     {
         if pickerView.superview == financeView
         {
@@ -630,15 +630,15 @@ extension DetailedReportViewController: UIPickerViewDelegate, UIPickerViewDataSo
             }
             else
             {
-                let indexPath = NSIndexPath(forRow: (row + 1), inSection: component)
-                let vehicle = resultsController?.objectAtIndexPath(indexPath) as! Vehicles
+                let indexPath = IndexPath(row: (row + 1), section: component)
+                let vehicle = resultsController?.object(at: indexPath) as! Vehicles
                 return vehicle.vehicleName!
             }
         }
         return ""
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
         if pickerView.superview == financeView
         {
@@ -682,8 +682,8 @@ extension DetailedReportViewController: UIPickerViewDelegate, UIPickerViewDataSo
         {
             if row != 0 && component == 0
             {
-                let indexPath = NSIndexPath(forRow: (row + 1), inSection: component)
-                let object = resultsController?.objectAtIndexPath(indexPath) as! Vehicles
+                let indexPath = IndexPath(row: (row + 1), section: component)
+                let object = resultsController?.object(at: indexPath) as! Vehicles
                 vehicleName.text = object.vehicleName
                 vehicleVIN.text = object.vin
                 vehicleYear.text = "\(object.year!)"

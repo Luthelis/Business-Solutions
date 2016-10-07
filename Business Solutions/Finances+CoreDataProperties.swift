@@ -15,7 +15,7 @@ import CoreData
 extension Finances {
 
     @NSManaged var amount: NSNumber?
-    @NSManaged var date: NSDate?
+    @NSManaged var date: Date?
     @NSManaged var frequency: String?
     @NSManaged var name: String?
     @NSManaged var recurring: NSNumber?

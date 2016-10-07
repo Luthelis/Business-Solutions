@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		E1332ADF1BFE44FD00B95760 /* BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1332ADE1BFE44FD00B95760 /* BusinessCell.swift */; };
 		E14A654E1B54889200CFE979 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E14A654D1B54889200CFE979 /* CoreData.framework */; };
-		E14A65501B5488B200CFE979 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E14A654F1B5488B200CFE979 /* AdSupport.framework */; };
-		E14A65521B5567F600CFE979 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E14A65511B5567F600CFE979 /* iAd.framework */; };
 		E1678C6F1BDD92A400B324FE /* ReportsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1678C6E1BDD92A400B324FE /* ReportsTableViewController.swift */; };
 		E1A6C90E1BE2EAC80073CF2B /* DetailedReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A6C90D1BE2EAC80073CF2B /* DetailedReportViewController.swift */; };
 		E1AD92DE1B9780DC007F8D38 /* Vehicles+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AD92D81B9780DC007F8D38 /* Vehicles+CoreDataProperties.swift */; };
@@ -33,8 +31,6 @@
 /* Begin PBXFileReference section */
 		E1332ADE1BFE44FD00B95760 /* BusinessCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessCell.swift; sourceTree = "<group>"; };
 		E14A654D1B54889200CFE979 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		E14A654F1B5488B200CFE979 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
-		E14A65511B5567F600CFE979 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		E1678C6E1BDD92A400B324FE /* ReportsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportsTableViewController.swift; sourceTree = "<group>"; };
 		E1A6C90D1BE2EAC80073CF2B /* DetailedReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedReportViewController.swift; sourceTree = "<group>"; };
 		E1AD92D81B9780DC007F8D38 /* Vehicles+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Vehicles+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -61,8 +57,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E14A65521B5567F600CFE979 /* iAd.framework in Frameworks */,
-				E14A65501B5488B200CFE979 /* AdSupport.framework in Frameworks */,
 				E14A654E1B54889200CFE979 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -88,8 +82,6 @@
 		E1AF18A11B5480CA00686734 = {
 			isa = PBXGroup;
 			children = (
-				E14A65511B5567F600CFE979 /* iAd.framework */,
-				E14A654F1B5488B200CFE979 /* AdSupport.framework */,
 				E14A654D1B54889200CFE979 /* CoreData.framework */,
 				E1AF18AC1B5480CA00686734 /* Business Solutions */,
 				E1AF18AB1B5480CA00686734 /* Products */,
@@ -150,11 +142,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Timothy Transue";
 				TargetAttributes = {
 					E1AF18A91B5480CA00686734 = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = 44524887D9;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -247,8 +241,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -270,7 +266,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -291,8 +287,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -308,9 +306,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -319,10 +318,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 44524887D9;
 				INFOPLIST_FILE = "Business Solutions/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ceeteedevelopment.Business-Solutions";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cee-tee-development.Business-Solutions";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -331,10 +333,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 44524887D9;
 				INFOPLIST_FILE = "Business Solutions/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ceeteedevelopment.Business-Solutions";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cee-tee-development.Business-Solutions";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -10,12 +10,12 @@ import Foundation
 import CoreData
 import UIKit
 
-class CoreDataHandler
+class CoreDataHandler: NSObject, NSFetchRequestResult
 {
     var context: NSManagedObjectContext
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
-    init()
+    override init()
     {
         context = appDelegate.managedObjectContext
     }
@@ -24,38 +24,38 @@ class CoreDataHandler
     {
         if name == "Finances"
         {
-            let financeManagedObject = NSEntityDescription.insertNewObjectForEntityForName(name, inManagedObjectContext: context) as! Finances
+            let financeManagedObject = NSEntityDescription.insertNewObject(forEntityName: name, into: context) as! Finances
             editManagedObject(financeManagedObject, withTextData: textInfo)
         }
         else if name == "Assets"
         {
-            let assetManagedObject = NSEntityDescription.insertNewObjectForEntityForName(name,inManagedObjectContext: context) as! Assets
+            let assetManagedObject = NSEntityDescription.insertNewObject(forEntityName: name,into: context) as! Assets
             editManagedObject(assetManagedObject, withTextData: textInfo)
         }
         else if name == "Vehicles"
         {
-            let vehicleManagedObject = NSEntityDescription.insertNewObjectForEntityForName(name, inManagedObjectContext: context) as! Vehicles
+            let vehicleManagedObject = NSEntityDescription.insertNewObject(forEntityName: name, into: context) as! Vehicles
             editManagedObject(vehicleManagedObject, withTextData: textInfo)
         }
     }
     
-    func editManagedObject(object:NSManagedObject, withTextData info:[String])
+    func editManagedObject(_ object:NSManagedObject, withTextData info:[String])
     {
-        let formatter = NSDateFormatter()
-        formatter.dateStyle = .MediumStyle
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
         if object.entity.name == "Finances"
         {
             var financeData = info
             let financeManagedObject = object as! Finances
             financeManagedObject.name = financeData.first
             financeData.removeFirst()
-            financeManagedObject.amount = NSNumberFormatter().numberFromString(financeData.first!)
+            financeManagedObject.amount = NumberFormatter().number(from: financeData.first!)
             financeData.removeFirst()
-            financeManagedObject.date = formatter.dateFromString(financeData.first!)
+            financeManagedObject.date = formatter.date(from: financeData.first!)
             financeData.removeFirst()
             financeManagedObject.frequency = financeData.first
             financeData.removeFirst()
-            financeManagedObject.recurring = NSNumberFormatter().numberFromString(financeData.first!)
+            financeManagedObject.recurring = NumberFormatter().number(from: financeData.first!)
             financeData.removeFirst()
         }
         else if object.entity.name == "Assets"
@@ -66,17 +66,17 @@ class CoreDataHandler
             assetInfo.removeFirst()
             assetManagedObject.serialNumber = assetInfo.first
             assetInfo.removeFirst()
-            assetManagedObject.cost = NSNumberFormatter().numberFromString(assetInfo.first!)
+            assetManagedObject.cost = NumberFormatter().number(from: assetInfo.first!)
             assetInfo.removeFirst()
-            assetManagedObject.dateOfPurchase = formatter.dateFromString(assetInfo.first!)
+            assetManagedObject.dateOfPurchase = formatter.date(from: assetInfo.first!)
             assetInfo.removeFirst()
             assetManagedObject.maintenanceDescription = assetInfo.first
             assetInfo.removeFirst()
-            assetManagedObject.maintenanceCost = NSNumberFormatter().numberFromString(assetInfo.first!)
+            assetManagedObject.maintenanceCost = NumberFormatter().number(from: assetInfo.first!)
             assetInfo.removeFirst()
-            assetManagedObject.maintenanceDate = formatter.dateFromString(assetInfo.first!)
+            assetManagedObject.maintenanceDate = formatter.date(from: assetInfo.first!)
             assetInfo.removeFirst()
-            assetManagedObject.maintainable = NSNumberFormatter().numberFromString(assetInfo.first!)
+            assetManagedObject.maintainable = NumberFormatter().number(from: assetInfo.first!)
             assetInfo.removeFirst()
         }
         else if object.entity.name == "Vehicles"
@@ -87,36 +87,36 @@ class CoreDataHandler
             vehicleInfo.removeFirst()
             vehicleManagedObject.vin = vehicleInfo.first
             vehicleInfo.removeFirst()
-            vehicleManagedObject.year = NSNumberFormatter().numberFromString(vehicleInfo.first!)
+            vehicleManagedObject.year = NumberFormatter().number(from: vehicleInfo.first!)
             vehicleInfo.removeFirst()
             vehicleManagedObject.make = vehicleInfo.first
             vehicleInfo.removeFirst()
             vehicleManagedObject.model = vehicleInfo.first
             vehicleInfo.removeFirst()
-            vehicleManagedObject.purchaseCost = NSNumberFormatter().numberFromString(vehicleInfo.first!)
+            vehicleManagedObject.purchaseCost = NumberFormatter().number(from: vehicleInfo.first!)
             vehicleInfo.removeFirst()
-            vehicleManagedObject.dateOfPurchase = formatter.dateFromString(vehicleInfo.first!)
+            vehicleManagedObject.dateOfPurchase = formatter.date(from: vehicleInfo.first!)
             vehicleInfo.removeFirst()
-            vehicleManagedObject.initialOdometer = NSNumberFormatter().numberFromString(vehicleInfo.first!)
+            vehicleManagedObject.initialOdometer = NumberFormatter().number(from: vehicleInfo.first!)
             vehicleInfo.removeFirst()
             vehicleManagedObject.maintenanceType = vehicleInfo.first
             vehicleInfo.removeFirst()
-            vehicleManagedObject.dateOfMaintenance = formatter.dateFromString(vehicleInfo.first!)
+            vehicleManagedObject.dateOfMaintenance = formatter.date(from: vehicleInfo.first!)
             vehicleInfo.removeFirst()
-            vehicleManagedObject.maintenanceCost = NSNumberFormatter().numberFromString(vehicleInfo.first!)
+            vehicleManagedObject.maintenanceCost = NumberFormatter().number(from: vehicleInfo.first!)
             vehicleInfo.removeFirst()
-            vehicleManagedObject.maintenanceOdometer = NSNumberFormatter().numberFromString(vehicleInfo.first!)
+            vehicleManagedObject.maintenanceOdometer = NumberFormatter().number(from: vehicleInfo.first!)
             vehicleInfo.removeFirst()
         }
         appDelegate.saveContext()
     }
     
-    func deleteManagedObject(object:NSManagedObject)
+    func deleteManagedObject(_ object:NSManagedObject)
     {
         do
         {
             try object.validateForDelete()
-            context.deleteObject(object)
+            context.delete(object)
             appDelegate.saveContext()
         } catch {
             let nserror = error as NSError
@@ -124,9 +124,9 @@ class CoreDataHandler
         }
     }
     
-    func createFetchRequest(forEntityName entity:String) -> NSFetchRequest
+    func createFetchRequest(forEntityName entity:String) -> NSFetchRequest<NSManagedObject>
     {
-        let request = NSFetchRequest(entityName: entity)
+        let request : NSFetchRequest<NSManagedObject> = NSFetchRequest(entityName: entity)
         var sorter : NSSortDescriptor
         if request.entityName == "Finances"
         {

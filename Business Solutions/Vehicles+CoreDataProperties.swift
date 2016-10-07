@@ -14,8 +14,8 @@ import CoreData
 
 extension Vehicles {
 
-    @NSManaged var dateOfMaintenance: NSDate?
-    @NSManaged var dateOfPurchase: NSDate?
+    @NSManaged var dateOfMaintenance: Date?
+    @NSManaged var dateOfPurchase: Date?
     @NSManaged var initialOdometer: NSNumber?
     @NSManaged var maintenanceCost: NSNumber?
     @NSManaged var maintenanceOdometer: NSNumber?

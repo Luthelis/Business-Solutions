@@ -16,15 +16,14 @@ class ReportsViewController: UIViewController
     // MARK: - Variables
     
     @IBOutlet weak var containerView: UIView!
-    @IBOutlet var menuView: UIView!
-    @IBOutlet weak var adView: ADBannerView!
+    @IBOutlet var menuView: MenuView!
     @IBOutlet weak var financeButton: UIButton!
     @IBOutlet weak var assetButton: UIButton!
     @IBOutlet weak var vehicleButton: UIButton!
     @IBOutlet var displayMenu: MenuView!
     @IBOutlet weak var displayButton: UIBarButtonItem!
     
-    let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    let context = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
     // MARK: - View Controller lifecycle
     
@@ -33,11 +32,8 @@ class ReportsViewController: UIViewController
         // Do any additional setup after loading the view, typically from a nib.
         createMenu()
         createDisplayMenu()
-        adView.delegate = self
-        canDisplayBannerAds = true
-        adView.hidden = true
-        let center = NSNotificationCenter.defaultCenter()
-        center.addObserver(self, selector: "detectAutoRotation:", name: UIDeviceOrientationDidChangeNotification, object: nil)
+        let center = NotificationCenter.default
+        center.addObserver(self, selector: #selector(ReportsViewController.detectAutoRotation(_:)), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,7 +41,7 @@ class ReportsViewController: UIViewController
         // Dispose of any resources that can be recreated.
     }
 
-    override func shouldAutorotate() -> Bool
+    override var shouldAutorotate : Bool
     {
         return false
     }
@@ -54,85 +50,85 @@ class ReportsViewController: UIViewController
     
     func createMenu()
     {
-        let menuRectangle = CGRectMake((view.frame.maxX - (financeButton.frame.width * 2)), (containerView.frame.minY), (financeButton.frame.size.width * 2), (financeButton.frame.size.height * 5))
+        let menuRectangle = CGRect(x: (containerView.frame.maxX - (financeButton.frame.width * 2)), y: (containerView.frame.minY), width: (financeButton.frame.size.width * 2), height: (financeButton.frame.size.height * 5))
         menuView.frame = menuRectangle
         self.view.addSubview(menuView)
-        menuView.hidden = true
+        menuView.isHidden = true
     }
     
     func createDisplayMenu()
     {
-        let menuRectangle = CGRectMake(containerView.frame.minX, containerView.frame.minY, (financeButton.frame.size.width * 2), (financeButton.frame.size.height * 5))
+        let menuRectangle = CGRect(x: containerView.frame.minX, y: containerView.frame.minY, width: (financeButton.frame.size.width * 2), height: (financeButton.frame.size.height * 5))
         displayMenu.frame = menuRectangle
         self.view.addSubview(displayMenu)
-        displayMenu.hidden = true
+        displayMenu.isHidden = true
     }
     
-    @IBAction func showMenu(sender: UIBarButtonItem)
+    @IBAction func showMenu(_ sender: UIBarButtonItem)
     {
-        switch menuView.hidden
+        switch menuView.isHidden
         {
         case true:
-            menuView.hidden = false
+            menuView.isHidden = false
         case false:
-            menuView.hidden = true
+            menuView.isHidden = true
         }
     }
     
-    @IBAction func showDisplayMenu(sender: UIBarButtonItem)
+    @IBAction func showDisplayMenu(_ sender: UIBarButtonItem)
     {
-        switch displayMenu.hidden
+        switch displayMenu.isHidden
         {
         case true:
-            displayMenu.hidden = false
+            displayMenu.isHidden = false
         case false:
-            displayMenu.hidden = true
+            displayMenu.isHidden = true
         }
     }
     
     
-    @IBAction func selectInformationToShow(sender: UIButton)
+    @IBAction func selectInformationToShow(_ sender: UIButton)
     {
         displayButton.title = sender.titleLabel?.text
         let table = self.childViewControllers.first as! ReportsTableViewController
         table.configureFetchedResultsController(withEntityName: (sender.titleLabel?.text)!)
-        displayMenu.hidden = true
+        displayMenu.isHidden = true
     }
     
     // MARK: - Notification Center
     
-    func detectAutoRotation(notification: NSNotification)
+    func detectAutoRotation(_ notification: Notification)
     {
-        let menuTest = menuView.hidden
-        let displayMenuTest = displayMenu.hidden
+        let menuTest = menuView.isHidden
+        let displayMenuTest = displayMenu.isHidden
         createMenu()
         createDisplayMenu()
         switch menuTest
         {
         case true:
-            menuView.hidden = true
+            menuView.isHidden = true
         case false:
-            menuView.hidden = false
+            menuView.isHidden = false
         }
         switch displayMenuTest
         {
         case true:
-            displayMenu.hidden = true
+            displayMenu.isHidden = true
         case false:
-            displayMenu.hidden = false
+            displayMenu.isHidden = false
         }
     }
 
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if segue.identifier == "addData"
         {
-            if let destination = segue.destinationViewController as? AddDataViewController
+            if let destination = segue.destination as? AddDataViewController
             {
                 if let button = sender as? UIButton
                 {
@@ -158,9 +154,9 @@ class ReportsViewController: UIViewController
         }
     }
     
-    @IBAction func prepareForUnwind(segue : UIStoryboardSegue)
+    @IBAction func prepareForUnwind(_ segue : UIStoryboardSegue)
     {
-        let source = segue.sourceViewController as! AddDataViewController
+        let source = segue.source as! AddDataViewController
         source.saveData()
         source.removeKeyboard()
         let child = self.childViewControllers.last as! ReportsTableViewController
@@ -168,9 +164,9 @@ class ReportsViewController: UIViewController
         child.tableView.reloadData()
     }
     
-    @IBAction func prepareForUnwindWithCancel(segue : UIStoryboardSegue)
+    @IBAction func prepareForUnwindWithCancel(_ segue : UIStoryboardSegue)
     {
-        let source = segue.sourceViewController as! AddDataViewController
+        let source = segue.source as! AddDataViewController
         source.removeKeyboard()
         let child = self.childViewControllers.last as! ReportsTableViewController
         child.performFetches()
@@ -179,52 +175,20 @@ class ReportsViewController: UIViewController
     
     // MARK: - Handle Autorotation
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask
     {
         let device = UIDevice()
         var orientation = UIInterfaceOrientationMask()
         switch device.userInterfaceIdiom
         {
-        case .Phone:
-            orientation = .AllButUpsideDown
-        case .Pad:
-            orientation = .All
-        case .Unspecified: break
+        case .phone:
+            orientation = .allButUpsideDown
+        case .pad:
+            orientation = .all
+        case .unspecified: break
         default: break
         }
         return orientation
     }
 }
 
-extension ReportsViewController :ADBannerViewDelegate
-{
-    // MARK: - iAd delegate functions
-    
-    func bannerViewActionShouldBegin(banner: ADBannerView!, willLeaveApplication willLeave: Bool) -> Bool
-    {
-        return true
-    }
-    
-    func bannerViewActionDidFinish(banner: ADBannerView!)
-    {
-        banner.hidden = true
-        let adDelay : NSTimeInterval = 60
-        let timerDate = NSDate(timeIntervalSinceNow: adDelay)
-        _ = NSTimer(fireDate: timerDate, interval: adDelay, target: self, selector: "restoreAdBannerPresence", userInfo: nil, repeats: false)
-    }
-    
-    func bannerViewDidLoadAd(banner: ADBannerView!) {
-        banner.hidden = false
-    }
-    
-    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!)
-    {
-        banner.hidden = true
-    }
-    
-    func restoreAdBannerPresence()
-    {
-        adView.hidden = false
-    }
-
-}

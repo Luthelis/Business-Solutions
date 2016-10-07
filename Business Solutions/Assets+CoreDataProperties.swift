@@ -15,10 +15,10 @@ import CoreData
 extension Assets {
 
     @NSManaged var cost: NSNumber?
-    @NSManaged var dateOfPurchase: NSDate?
+    @NSManaged var dateOfPurchase: Date?
     @NSManaged var maintainable: NSNumber?
     @NSManaged var maintenanceCost: NSNumber?
-    @NSManaged var maintenanceDate: NSDate?
+    @NSManaged var maintenanceDate: Date?
     @NSManaged var maintenanceDescription: String?
     @NSManaged var nameOfItem: String?
     @NSManaged var serialNumber: String?

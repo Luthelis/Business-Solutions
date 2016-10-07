@@ -79,29 +79,29 @@ class AddDataViewController: UIViewController, UIScrollViewDelegate {
     // MARK: - Data Controllers
     
     let handler = CoreDataHandler()
-    let applicationDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    var designatedController : NSFetchedResultsController?
+    let applicationDelegate = UIApplication.shared.delegate as! AppDelegate
+    var designatedController : NSFetchedResultsController<NSManagedObject>?
     
     // MARK: - View Controller Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        presentingViewController?.supportedInterfaceOrientations()
+        // presentingViewController?.supportedInterfaceOrientations
         let device = UIDevice()
         device.beginGeneratingDeviceOrientationNotifications()
-        let center = NSNotificationCenter.defaultCenter()
-        center.addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: self)
-        center.addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: self)
-        center.addObserver(self, selector: "detectAutoRotation:", name: UIDeviceOrientationDidChangeNotification, object: self)
-        dataScroller.scrollEnabled = true
+        let center = NotificationCenter.default
+        center.addObserver(self, selector: #selector(AddDataViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: self)
+        center.addObserver(self, selector: #selector(AddDataViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: self)
+        center.addObserver(self, selector: #selector(AddDataViewController.detectAutoRotation(_:)), name: NSNotification.Name.UIDeviceOrientationDidChange, object: self)
+        dataScroller.isScrollEnabled = true
         dataScroller.bounces = true
         dataScroller.alwaysBounceVertical = true
         dataScroller.delegate = self
         titleBar.title = titleString!
-        datePicker.datePickerMode = .Date
-        datePicker.setDate(NSDate(), animated: false)
-        datePicker.addTarget(self, action: "updateDateField:", forControlEvents: .ValueChanged)
+        datePicker.datePickerMode = .date
+        datePicker.setDate(Date(), animated: false)
+        datePicker.addTarget(self, action: #selector(AddDataViewController.updateDateField(_:)), for: .valueChanged)
         recurringPicker.delegate = self
         recurringPicker.dataSource = self
         vehiclePicker.delegate = self
@@ -133,13 +133,13 @@ class AddDataViewController: UIViewController, UIScrollViewDelegate {
                 }
             }
         }
-        if device.orientation == .LandscapeLeft || device.orientation == .LandscapeRight
+        if device.orientation == .landscapeLeft || device.orientation == .landscapeRight
         {
             self.view.setNeedsDisplay()
         }
     }
     
-    override func viewWillDisappear(animated: Bool)
+    override func viewWillDisappear(_ animated: Bool)
     {
         super.viewWillDisappear(animated)
         for screen in self.dataScroller.subviews
@@ -166,11 +166,11 @@ class AddDataViewController: UIViewController, UIScrollViewDelegate {
         financeRecurring.setOn(false, animated: false)
         for label in frequencyLabelCollection
         {
-            label.hidden = true
+            label.isHidden = true
         }
         for field in frequencyTextFieldCollection
         {
-            field.hidden = true
+            field.isHidden = true
         }
         financeView.setNeedsDisplay()
     }
@@ -185,11 +185,11 @@ class AddDataViewController: UIViewController, UIScrollViewDelegate {
         assetMaintainable.setOn(false, animated: false)
         for label in maintenanceLabelCollection
         {
-            label.hidden = true
+            label.isHidden = true
         }
         for field in maintenanceTextFieldCollection
         {
-            field.hidden = true
+            field.isHidden = true
         }
         assetView.setNeedsDisplay()
     }
@@ -204,11 +204,11 @@ class AddDataViewController: UIViewController, UIScrollViewDelegate {
         vehicleView.setNeedsDisplay()
     }
     
-    func setTextFieldProperties(fieldCollection: [UITextField])
+    func setTextFieldProperties(_ fieldCollection: [UITextField])
     {
         for field in fieldCollection
         {
-            field.clearButtonMode = .WhileEditing
+            field.clearButtonMode = .whileEditing
             field.delegate = self
             field.adjustsFontSizeToFitWidth = true
             field.minimumFontSize = 6
@@ -216,15 +216,15 @@ class AddDataViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    func orderTextFields(fieldCollection: [UITextField]) -> [UITextField]
+    func orderTextFields(_ fieldCollection: [UITextField]) -> [UITextField]
     {
-        let sortedFieldCollection = fieldCollection.sort({ $0.tag < $1.tag})
+        let sortedFieldCollection = fieldCollection.sorted(by: { $0.tag < $1.tag})
         return sortedFieldCollection
     }
     
     // MARK: - Accessory View Functions
     
-    @IBAction func dismissKeyboard(sender: UIButton)
+    @IBAction func dismissKeyboard(_ sender: UIButton)
     {
         if let field = detectFirstResponder(inView: dataScroller.subviews.first!) as? UITextField
         {
@@ -232,7 +232,7 @@ class AddDataViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    @IBAction func nextField(sender: UIButton)
+    @IBAction func nextField(_ sender: UIButton)
     {
         let currentView = dataScroller.subviews.first!
         if let field = detectFirstResponder(inView: currentView) as? UITextField
@@ -242,7 +242,7 @@ class AddDataViewController: UIViewController, UIScrollViewDelegate {
             {
                 if view.tag == nextFieldTag
                 {
-                    if view.hidden == false
+                    if view.isHidden == false
                     {
                         view.becomeFirstResponder()
                     }
@@ -252,7 +252,7 @@ class AddDataViewController: UIViewController, UIScrollViewDelegate {
         }
     }
 
-    @IBAction func previousField(sender: UIButton)
+    @IBAction func previousField(_ sender: UIButton)
     {
         let currentView = dataScroller.subviews.first!
         if let currentField = detectFirstResponder(inView: currentView) as? UITextField
@@ -262,7 +262,7 @@ class AddDataViewController: UIViewController, UIScrollViewDelegate {
             {
                 if view.tag == previousFieldTag
                 {
-                    if view.hidden == false
+                    if view.isHidden == false
                     {
                         view.becomeFirstResponder()
                     }
@@ -282,13 +282,13 @@ class AddDataViewController: UIViewController, UIScrollViewDelegate {
     
     // MARK: - Keyboard Notification Functions
     
-    func keyboardWillShow(notification: NSNotification)
+    func keyboardWillShow(_ notification: Notification)
     {
-        let userInfo = notification.userInfo
+        let userInfo = (notification as NSNotification).userInfo
         let localKeyboard = (userInfo![UIKeyboardIsLocalUserInfoKey] as! NSNumber).boolValue
         if !localKeyboard
         {
-            if let keyboardSize = (userInfo![UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue()
+            if let keyboardSize = (userInfo![UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
             {
                 let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
                 dataScroller.contentInset = contentInsets
@@ -296,67 +296,67 @@ class AddDataViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    func keyboardWillHide(notification: NSNotification)
+    func keyboardWillHide(_ notification: Notification)
     {
-        if let userInfo = notification.userInfo
+        if let userInfo = (notification as NSNotification).userInfo
         {
-            if let keyboardSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue()
+            if let keyboardSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
             {
                 let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
                 dataScroller.contentInset = contentInsets
             }
         }
-        dataScroller.contentOffset = CGPointZero
+        dataScroller.contentOffset = CGPoint.zero
     }
     
     // MARK: - Switch Action Functions
     
-    @IBAction func financeRecurringSwitch(sender: UISwitch)
+    @IBAction func financeRecurringSwitch(_ sender: UISwitch)
     {
-        switch sender.on
+        switch sender.isOn
         {
         case true:
             for label in frequencyLabelCollection
             {
-                label.hidden = false
+                label.isHidden = false
             }
             for field in frequencyTextFieldCollection
             {
-                field.hidden = false
+                field.isHidden = false
             }
         case false:
             for label in frequencyLabelCollection
             {
-                label.hidden = true
+                label.isHidden = true
             }
             for field in frequencyTextFieldCollection
             {
-                field.hidden = true
+                field.isHidden = true
             }
         }
     }
     
-    @IBAction func assetMaintenanceSwitch(sender: UISwitch)
+    @IBAction func assetMaintenanceSwitch(_ sender: UISwitch)
     {
-        switch sender.on
+        switch sender.isOn
         {
         case true:
             for label in maintenanceLabelCollection
             {
-                label.hidden = false
+                label.isHidden = false
             }
             for field in maintenanceTextFieldCollection
             {
-                field.hidden = false
+                field.isHidden = false
             }
         case false:
             for label in maintenanceLabelCollection
             {
-                label.hidden = true
+                label.isHidden = true
             }
             for field in maintenanceTextFieldCollection
             {
-                field.hidden = true
+                field.isHidden = true
             }
         }
     }
@@ -364,12 +364,12 @@ class AddDataViewController: UIViewController, UIScrollViewDelegate {
 
     // MARK: - Autorotation Detection
     
-    func detectAutoRotation(notification: NSNotification)
+    func detectAutoRotation(_ notification: Notification)
     {
         self.view.setNeedsDisplay()
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator)
     {
         self.view.setNeedsDisplay()
     }
@@ -379,7 +379,7 @@ class AddDataViewController: UIViewController, UIScrollViewDelegate {
     func detectFirstResponder(inView view : UIView) -> UIView?
     {
         var responderView = view
-        if responderView.isFirstResponder()
+        if responderView.isFirstResponder
         {
             return responderView
         }
@@ -387,7 +387,7 @@ class AddDataViewController: UIViewController, UIScrollViewDelegate {
         {
             for subView in responderView.subviews
             {
-                if subView.isFirstResponder()
+                if subView.isFirstResponder
                 {
                     responderView = subView
                 }
@@ -403,22 +403,22 @@ class AddDataViewController: UIViewController, UIScrollViewDelegate {
         {
             for field in self.financeCollection
             {
-                textArray.insert(field.text!, atIndex: textArray.endIndex)
+                textArray.insert(field.text!, at: textArray.endIndex)
             }
-            textArray.insert("\(financeRecurring.on)", atIndex: textArray.endIndex)
+            textArray.insert("\(financeRecurring.isOn)", at: textArray.endIndex)
             self.handler.createManagedObject(withData: textArray, withEntityName: "Finances")
         }
         else if self.dataSelector == 2
         {
             for field in self.assetCollection
             {
-                textArray.insert(field.text!, atIndex: textArray.endIndex)
+                textArray.insert(field.text!, at: textArray.endIndex)
             }
-            textArray.insert("\(assetMaintainable.on)", atIndex: textArray.endIndex)
+            textArray.insert("\(assetMaintainable.isOn)", at: textArray.endIndex)
             self.handler.createManagedObject(withData: textArray, withEntityName: "Assets")
             var secondaryArray = [String]()
             secondaryArray.append(assetName.text!)
-            if assetMaintainable.on
+            if assetMaintainable.isOn
             {
                 secondaryArray.append(assetMaintenancePrice.text!)
                 secondaryArray.append(assetMaintenanceDate.text!)
@@ -437,7 +437,7 @@ class AddDataViewController: UIViewController, UIScrollViewDelegate {
         {
             for field in self.vehicleCollection
             {
-                textArray.insert(field.text!, atIndex: textArray.endIndex)
+                textArray.insert(field.text!, at: textArray.endIndex)
             }
             self.handler.createManagedObject(withData: textArray, withEntityName: "Vehicles")
             var secondaryArray = [String]()
@@ -459,12 +459,12 @@ class AddDataViewController: UIViewController, UIScrollViewDelegate {
         self.applicationDelegate.saveContext()
     }
 
-    func updateDateField(datePicker: UIDatePicker)
+    func updateDateField(_ datePicker: UIDatePicker)
     {
-        let formatter = NSDateFormatter()
-        formatter.calendar = NSCalendar.autoupdatingCurrentCalendar()
-        formatter.dateStyle = .MediumStyle
-        (self.detectFirstResponder(inView: dataScroller.subviews.first!) as! UITextField).text = formatter.stringFromDate(datePicker.date)
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar.autoupdatingCurrent
+        formatter.dateStyle = .medium
+        (self.detectFirstResponder(inView: dataScroller.subviews.first!) as! UITextField).text = formatter.string(from: datePicker.date)
     }
     
     /*
@@ -483,28 +483,28 @@ class AddDataViewController: UIViewController, UIScrollViewDelegate {
 
 extension AddDataViewController: UITextFieldDelegate
 {
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
     {
         return true
     }
     
-    func textFieldShouldEndEditing(textField: UITextField) -> Bool
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool
     {
         return true
     }
     
-    func textFieldDidBeginEditing(textField: UITextField)
+    func textFieldDidBeginEditing(_ textField: UITextField)
     {
         dataScroller.scrollRectToVisible(textField.frame, animated: true)
     }
     
-    func textFieldShouldClear(textField: UITextField) -> Bool
+    func textFieldShouldClear(_ textField: UITextField) -> Bool
     {
         textField.text = ""
         return true
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
         let nextFieldTag = textField.tag + 1
         for view in (dataScroller.subviews.first?.subviews)!
@@ -523,7 +523,7 @@ extension AddDataViewController: UITextFieldDelegate
 
 extension AddDataViewController : UIPickerViewDelegate, UIPickerViewDataSource
 {
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int
+    func numberOfComponents(in pickerView: UIPickerView) -> Int
     {
         if pickerView.superview == financeView
         {
@@ -536,7 +536,7 @@ extension AddDataViewController : UIPickerViewDelegate, UIPickerViewDataSource
         return 0
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
     {
         if pickerView.superview == financeView
         {
@@ -549,7 +549,7 @@ extension AddDataViewController : UIPickerViewDelegate, UIPickerViewDataSource
         return 0
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
     {
         if pickerView.superview == financeView
         {
@@ -598,15 +598,15 @@ extension AddDataViewController : UIPickerViewDelegate, UIPickerViewDataSource
             }
             else
             {
-                let indexPath = NSIndexPath(forRow: (row + 1), inSection: component)
-                let vehicle = designatedController?.objectAtIndexPath(indexPath) as! Vehicles
+                let indexPath = IndexPath(row: (row + 1), section: component)
+                let vehicle = designatedController?.object(at: indexPath) as! Vehicles
                 return vehicle.vehicleName!
             }
         }
         return ""
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
         if pickerView.superview == financeView
         {
@@ -650,8 +650,8 @@ extension AddDataViewController : UIPickerViewDelegate, UIPickerViewDataSource
         {
             if row != 0 && component == 0
             {
-                let indexPath = NSIndexPath(forRow: (row + 1), inSection: component)
-                let object = designatedController?.objectAtIndexPath(indexPath) as! Vehicles
+                let indexPath = IndexPath(row: (row + 1), section: component)
+                let object = designatedController?.object(at: indexPath) as! Vehicles
                 vehicleName.text = object.vehicleName
                 vehicleVIN.text = object.vin
                 vehicleYear.text = "\(object.year!)"
